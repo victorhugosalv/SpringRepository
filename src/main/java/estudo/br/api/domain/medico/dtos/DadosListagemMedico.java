@@ -1,6 +1,6 @@
-package estudo.br.api.dados;
+package estudo.br.api.domain.medico.dtos;
 
-import estudo.br.api.models.Especialidade;
+import estudo.br.api.domain.medico.Especialidade;
 
 public record DadosListagemMedico(
         Long id,

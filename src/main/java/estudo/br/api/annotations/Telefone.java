@@ -1,4 +1,4 @@
-package estudo.br.api.validations;
+package estudo.br.api.annotations;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

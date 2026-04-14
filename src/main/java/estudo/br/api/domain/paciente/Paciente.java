@@ -1,19 +1,21 @@
-package estudo.br.api.models;
+package estudo.br.api.domain.paciente;
 
-import estudo.br.api.dados.DadosAtualizacaoMedico;
+import estudo.br.api.domain.medico.endereco.Endereco;
+import estudo.br.api.domain.medico.endereco.EnderecoMapper;
+import estudo.br.api.domain.paciente.dtos.DadosAtualizacaoPaciente;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Optional;
 
 @Entity
-@Table(name = "medicos")
+@Table(name = "pacientes")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Setter
-public class Medico {
+public class Paciente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,24 +27,21 @@ public class Medico {
 
     private String telefone;
 
-    private String crm;
-
-    @Enumerated(EnumType.STRING)
-    private Especialidade especialidade;
+    private String cpf;
 
     @Embedded
     private Endereco endereco;
 
     private Boolean ativo;
 
-    public void atualizaDados(DadosAtualizacaoMedico dados) {
+    public void atualizaDados(DadosAtualizacaoPaciente dados) {
         Optional.ofNullable(dados.nome()).ifPresent(nome -> this.nome = nome);
         Optional.ofNullable(dados.email()).ifPresent(email -> this.email = email);
         Optional.ofNullable(dados.telefone()).ifPresent(telefone -> this.telefone = telefone);
-        Optional.ofNullable(dados.endereco()).ifPresent(endereco -> this.endereco.atualizaDados(endereco));
+        Optional.ofNullable(dados.endereco()).ifPresent(endereco -> this.endereco.atualizaDados(EnderecoMapper.toEndereco(endereco)));
     }
 
-    public void demitir() {
+    public void inativar() {
         setAtivo(false);
     }
 }

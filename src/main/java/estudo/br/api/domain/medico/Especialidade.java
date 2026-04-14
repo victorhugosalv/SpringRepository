@@ -1,4 +1,4 @@
-package estudo.br.api.models;
+package estudo.br.api.domain.medico;
 
 public enum Especialidade {
     ORTOPEDIA,

@@ -1,4 +1,4 @@
-package estudo.br.api.dados;
+package estudo.br.api.domain.medico.endereco;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

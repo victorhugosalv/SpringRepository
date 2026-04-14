@@ -1,10 +1,7 @@
-package estudo.br.api.mappers;
-
-import estudo.br.api.dados.DadosEndereco;
-import estudo.br.api.models.Endereco;
+package estudo.br.api.domain.medico.endereco;
 
 public class EnderecoMapper {
-    protected static Endereco toEndereco(DadosEndereco dados) {
+    public static Endereco toEndereco(DadosEndereco dados) {
         return new Endereco(
                 dados.logradouro(),
                 dados.bairro(),
@@ -16,7 +13,7 @@ public class EnderecoMapper {
         );
     }
 
-    protected static DadosEndereco toDados(Endereco endereco) {
+    public static DadosEndereco toDados(Endereco endereco) {
         return new DadosEndereco(
                 endereco.getLogradouro(),
                 endereco.getBairro(),

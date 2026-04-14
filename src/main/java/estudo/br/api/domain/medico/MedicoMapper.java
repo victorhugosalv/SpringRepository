@@ -1,8 +1,9 @@
-package estudo.br.api.mappers;
+package estudo.br.api.domain.medico;
 
-import estudo.br.api.dados.DadosCadastroMedico;
-import estudo.br.api.dados.DadosListagemMedico;
-import estudo.br.api.models.Medico;
+import estudo.br.api.domain.medico.dtos.DadosDetalhamentoMedico;
+import estudo.br.api.domain.medico.endereco.EnderecoMapper;
+import estudo.br.api.domain.medico.dtos.DadosCadastroMedico;
+import estudo.br.api.domain.medico.dtos.DadosListagemMedico;
 
 public class MedicoMapper {
 
@@ -14,7 +15,7 @@ public class MedicoMapper {
         medico.setCrm(dados.crm());
         medico.setEspecialidade(dados.especialidade());
         medico.setEndereco(EnderecoMapper.toEndereco(dados.endereco()));
-        medico.setAtivo(dados.ativo());
+        medico.setAtivo(true); // O padrão ao cadastrar é sempre true
         return medico;
     }
 
@@ -25,10 +26,8 @@ public class MedicoMapper {
                 medico.getTelefone(),
                 medico.getCrm(),
                 medico.getEspecialidade(),
-                EnderecoMapper.toDados(medico.getEndereco()),
-                medico.getAtivo()
+                EnderecoMapper.toDados(medico.getEndereco())
         );
-
     }
 
     public static DadosListagemMedico toDadosListagem(Medico medico) {
@@ -40,7 +39,20 @@ public class MedicoMapper {
                 medico.getEspecialidade(),
                 medico.getAtivo()
         );
-
     }
+
+    public static DadosDetalhamentoMedico toDadosDetalhamento(Medico medico){
+        return new DadosDetalhamentoMedico(
+                medico.getId(),
+                medico.getNome(),
+                medico.getEmail(),
+                medico.getTelefone(),
+                medico.getCrm(),
+                medico.getEspecialidade(),
+                EnderecoMapper.toDados(medico.getEndereco()),
+                medico.getAtivo()
+        );
+    }
+
 
 }

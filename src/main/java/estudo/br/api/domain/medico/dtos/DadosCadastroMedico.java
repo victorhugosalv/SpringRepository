@@ -1,7 +1,8 @@
-package estudo.br.api.dados;
+package estudo.br.api.domain.medico.dtos;
 
-import estudo.br.api.models.Especialidade;
-import estudo.br.api.validations.Telefone;
+import estudo.br.api.domain.medico.endereco.DadosEndereco;
+import estudo.br.api.annotations.Telefone;
+import estudo.br.api.domain.medico.Especialidade;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
@@ -23,8 +24,6 @@ public record DadosCadastroMedico(
         Especialidade especialidade,
         @NotNull
         @Valid
-        DadosEndereco endereco,
-        @AssertTrue
-        Boolean ativo
+        DadosEndereco endereco
 ) {
 }

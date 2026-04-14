@@ -1,7 +1,7 @@
-package estudo.br.api.dados;
+package estudo.br.api.domain.medico.dtos;
 
-import estudo.br.api.models.Endereco;
-import estudo.br.api.validations.Telefone;
+import estudo.br.api.domain.medico.endereco.DadosEndereco;
+import estudo.br.api.annotations.Telefone;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizacaoMedico(
@@ -9,5 +9,5 @@ public record DadosAtualizacaoMedico(
         String nome,
         String email,
         @Telefone String telefone,
-        Endereco endereco) {
+        DadosEndereco endereco) {
 }

@@ -1,4 +1,4 @@
-package estudo.br.api.models;
+package estudo.br.api.domain.medico.endereco;
 
 import jakarta.persistence.Embeddable;
 import lombok.*;
