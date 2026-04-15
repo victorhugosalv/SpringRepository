@@ -4,6 +4,8 @@ import estudo.br.api.domain.medico.dtos.DadosAtualizacaoMedico;
 import estudo.br.api.domain.medico.dtos.DadosCadastroMedico;
 import estudo.br.api.domain.medico.dtos.DadosDetalhamentoMedico;
 import estudo.br.api.domain.medico.dtos.DadosListagemMedico;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,7 @@ public class MedicoController {
     private MedicoService medicoService;
 
     @PostMapping
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<DadosDetalhamentoMedico> cadastrar(@RequestBody @Valid DadosCadastroMedico dados, UriComponentsBuilder uriBuilder){
         DadosDetalhamentoMedico medico = medicoService.cadastrar(dados);
         var uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medico.id()).toUri();
@@ -29,27 +32,32 @@ public class MedicoController {
     }
 
     @GetMapping
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<Page<DadosListagemMedico>> listar(@PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao){
         return ResponseEntity.ok(medicoService.listar(paginacao));
     }
 
     @PutMapping
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<DadosDetalhamentoMedico> atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados){
         return ResponseEntity.ok(medicoService.atualizar(dados));
     }
 
     @DeleteMapping("/{id}")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         medicoService.deletar(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<DadosDetalhamentoMedico> detalhar(@PathVariable Long id) {
         return ResponseEntity.ok(medicoService.detalhar(id));
     }
 
     @DeleteMapping("/demitir/{id}")
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public ResponseEntity<Void> demitir(@PathVariable Long id){
         medicoService.demitir(id);
         return ResponseEntity.noContent().build();
